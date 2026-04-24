@@ -5,7 +5,8 @@ echo "================================================="
 echo " Setting up UFACTORY xArm 7 ROS 2 Workspace"
 echo "================================================="
 
-WORKSPACE_DIR="$HOME/xarm_ros2_ws"
+# The workspace is the current directory
+WORKSPACE_DIR="$(pwd)"
 
 # Install basic build tools
 echo "=> Installing basic tools..."
@@ -20,28 +21,11 @@ fi
 echo "=> Updating rosdep..."
 rosdep update
 
-# Create workspace and pull source
-echo "=> Creating workspace at $WORKSPACE_DIR..."
-mkdir -p "$WORKSPACE_DIR/src"
-cd "$WORKSPACE_DIR/src"
-
-if [ ! -d "xarm_ros2" ]; then
-    echo "=> Cloning xarm_ros2 repository (humble branch)..."
-    git clone https://github.com/xArm-Developer/xarm_ros2.git --branch humble
-fi
-
-echo "=> Updating submodules..."
-cd xarm_ros2
-git pull
-git submodule sync
-git submodule update --init --remote
-
 # Ignore realsense plugin to avoid extra heavy dependencies if not needed
-touch thirdparty/realsense_gazebo_plugin/COLCON_IGNORE
+touch src/xarm_ros2/thirdparty/realsense_gazebo_plugin/COLCON_IGNORE || true
 
 # Install ROS 2 dependencies
 echo "=> Installing ROS 2 dependencies (this may ask for your password)..."
-cd "$WORKSPACE_DIR"
 rosdep install --from-paths src --ignore-src --rosdistro humble -y
 
 # Build the workspace

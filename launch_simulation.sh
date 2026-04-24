@@ -7,7 +7,8 @@ echo "================================================="
 # Prevent Gazebo from hanging on startup by bypassing the model database
 export GAZEBO_MODEL_DATABASE_URI=""
 
-WORKSPACE_DIR="$HOME/xarm_ros2_ws"
+# The workspace is the current directory
+WORKSPACE_DIR="$(pwd)"
 
 if [ ! -f "$WORKSPACE_DIR/install/setup.bash" ]; then
     echo "Error: Workspace is not built! Please run ./setup.sh first."

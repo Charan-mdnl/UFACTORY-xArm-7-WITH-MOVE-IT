@@ -1,6 +1,6 @@
 # UFACTORY xArm 7 Simulation with MoveIt 2 and Gazebo
 
-This repository provides a complete, 1-click setup to simulate the UFACTORY xArm 7 robotic arm in ROS 2 Humble using Gazebo Classic and MoveIt 2. 
+This repository contains the complete A to Z source code and a 1-click setup to simulate the UFACTORY xArm 7 robotic arm in ROS 2 Humble using Gazebo Classic and MoveIt 2. It is completely self-contained so that anyone can download it and run it immediately on their PC.
 
 ## 🚀 Getting Started
 
@@ -10,9 +10,9 @@ This repository provides a complete, 1-click setup to simulate the UFACTORY xArm
 - Gazebo Classic installed
 
 ### 1. Setup the Workspace
-We have provided an automated setup script that creates a Colcon workspace, downloads the official `xarm_ros2` repository (along with its submodules), installs missing dependencies via `rosdep`, and compiles everything with the correct CMake flags.
+We have provided an automated setup script that installs any missing system dependencies via `rosdep` and compiles the included source code with the correct CMake flags.
 
-Open a terminal and run:
+Open a terminal in this repository folder and run:
 ```bash
 chmod +x setup.sh
 ./setup.sh
@@ -37,4 +37,4 @@ chmod +x launch_simulation.sh
 
 ## 🐛 Troubleshooting
 - **Gazebo is empty (no robot):** Ensure you run `./launch_simulation.sh` instead of launching it manually, as the script clears the `GAZEBO_MODEL_DATABASE_URI` variable to prevent Gazebo from hanging on startup.
-- **Compilation errors (libssl or libcurl):** If you use Anaconda/Miniforge, it may interfere with CMake. The `setup.sh` script ignores conda paths, but if you build manually, make sure conda is fully deactivated.
+- **Compilation errors (libssl or libcurl):** If you use Anaconda/Miniforge, it may interfere with CMake. Make sure conda is fully deactivated before running `./setup.sh`.
